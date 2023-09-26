@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+
+        #mainContainer{
+            border:"2px, solid ,black";
+        }
+
+        .errorMsg{
+        color:red;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="mainContainer">
+        <div class="heading"></div>
+        <div class="loginForm">
+
+            <div th:if="${param.error}">
+                <p class="errorMsg">Invalid username or password</p>
+            </div>
+
+            <form action="#" th:action="@{/authenticateUser}" method="POST">
+                <p>
+                    <input id="user" type="text" placeholder="Username" name="username">
+                </p>
+
+                <p>
+                    <input id="pass" type="password" placeholder="Password" name="password">
+                </p>
+
+                <p>
+                    <input type="submit" value="Login">
+                </p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
