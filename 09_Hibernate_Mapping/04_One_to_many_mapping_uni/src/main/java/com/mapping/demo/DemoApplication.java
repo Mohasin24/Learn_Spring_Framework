@@ -4,6 +4,7 @@ import com.mapping.demo.dao.AppDAO;
 import com.mapping.demo.entity.Course;
 import com.mapping.demo.entity.Instructor;
 import com.mapping.demo.entity.InstructorDetail;
+import com.mapping.demo.entity.Review;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,24 +23,48 @@ public class DemoApplication {
 	public CommandLineRunner commandLineRunner(AppDAO appDAO)
 	{
 		return runner ->{
-//			createInstructor(appDAO);
-//			findById(appDAO);
-//			deleteById(appDAO);
-
-			//bi directional mapping
-//			findInstructorDetailById(appDAO);
-//			deleteInstructorDetailById(appDAO);
-
-//			createInstructorWithCourse(appDAO);
-//			findInstructorWithCourses(appDAO);
-//			findCoursesForInstructor(appDAO);
-//			findInstructorWithCoursesJoinFetch(appDAO);
-			
-//			updateInstructor(appDAO);
-//			updateTheCourse(appDAO);
-//			deleteTheInstructorById(appDAO);
-			deleteTheCourseById(appDAO);
+//			createCourseAndReview(appDAO);
+//			getTheCourseAndReviewsByCourseId(appDAO);
+			deleteTheCourseAndReviewsByCourseId(appDAO);
 		};
+	}
+
+	private void deleteTheCourseAndReviewsByCourseId(AppDAO appDAO)
+	{
+		int theId = 11;
+		System.out.println("Deleting the course with review with id : " + theId);
+		appDAO.deleteCourseAndReviewByCourseId(theId);
+		System.out.println("Done!");
+	}
+
+	private void getTheCourseAndReviewsByCourseId(AppDAO appDAO)
+	{
+		int theId = 10;
+		System.out.println("Getting the course details with the id : " + theId);
+
+		Course tempCourse = appDAO.findCourseAndReviewsByCourseId(theId);
+
+		System.out.println("Course : " + tempCourse);
+		System.out.println("Course Reviews : " + tempCourse.getReviewList());
+	}
+
+	private void createCourseAndReview(AppDAO appDAO)
+	{
+		// create course
+		Course tempCourse = new Course("Learn Python");
+
+		//add some review
+		tempCourse.addReview(new Review("Great course"));
+		tempCourse.addReview(new Review("Must take the course"));
+		tempCourse.addReview(new Review("Not that much impressive course"));
+
+		System.out.println("Saving the course : " + tempCourse);
+		System.out.println(tempCourse.getReviewList());
+
+		//save course
+		appDAO.save(tempCourse);
+
+		System.out.println("Done!");
 	}
 
 	private void deleteTheCourseById(AppDAO appDAO)

@@ -25,4 +25,10 @@ public interface AppDAO
     void deleteInstructorById(int theId);
 
     void deleteCourseById(int theId);
+
+    void save(Course course);
+
+    Course findCourseAndReviewsByCourseId(int theId);
+
+    void deleteCourseAndReviewByCourseId(int theId);
 }
