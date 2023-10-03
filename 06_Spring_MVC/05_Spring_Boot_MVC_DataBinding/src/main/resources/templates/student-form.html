@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Student Form </title>
+</head>
+<body>
+    <div>
+        <h1>Student Registration Form</h1>
+
+        <form th:action="@{/processStudentForm}" th:object="${student}" method="POST">
+
+            <label>First name : </label>
+            <input type="text" th:field="*{firstName}">
+
+            <br><br>
+
+            <label>Last name : </label>
+            <input type="text" th:field="*{lastName}">
+
+            <br><br>
+
+            <label>Country </label>
+            <select th:field="*{country}">
+
+                <option  th:each="tempCountry : ${countries}"
+                         th:value="${tempCountry}"
+                         th:text="${tempCountry}"
+                ></option>
+
+<!--                <option value="Brazil">Brazil</option>-->
+<!--                <option value="India">India</option>-->
+<!--                <option value="France">France</option>-->
+<!--                <option value="America">America</option>-->
+            </select>
+
+            <br><br>
+
+            <label>Favourite Programming Language : </label>
+
+            <input
+                    type="radio"
+                    th:field="*{favouriteLanguage}"
+                    th:each="tempLang : ${languages}"
+                    th:value="${tempLang}"
+                    th:text="${tempLang}"
+             >
+
+
+<!--            <input type="radio" th:field="*{favouriteLanguage}" value="Go">Go</input>-->
+<!--            <input type="radio" th:field="*{favouriteLanguage}" value="Java">Java</input>-->
+<!--            <input type="radio" th:field="*{favouriteLanguage}" value="Python">Python</input>-->
+
+            <br><br>
+
+            <label>Favourite Operating Systems : </label>
+
+<!--            <input type="checkbox" th:field="*{favouriteSystems}" th:value="'Microsoft Windows'">Microsoft Windows</input>-->
+<!--            <input type="checkbox" th:field="*{favouriteSystems}" th:value="Linux">Linux</input>-->
+<!--            <input type="checkbox" th:field="*{favouriteSystems}" th:value="Mac">Mac</input>-->
+
+            <input
+                    type="checkbox"
+                    th:field="*{favouriteSystems}"
+                    th:each="tempSystem : ${systems}"
+                    th:value="${tempSystem}"
+                    th:text="${tempSystem}"
+            >
+
+            <br><br>
+
+            <input type="submit" value="Submit">
+        </form>
+
+    </div>
+</body>
+</html>
